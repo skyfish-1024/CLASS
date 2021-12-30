@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Myblog</title>
+</head>
+<style>
+    a {
+        text-decoration: none;
+    }
+
+    body {
+        display: block;
+        background-color: #f3f5f7;
+        height: 2000px;
+        width: 100%;
+        background: url(/account/images/登录背景.jpg) no-repeat;
+        background-size: cover;
+        background-attachment: fixed;
+
+    }
+
+    .header h1 {
+        color: white;
+        text-align: center;
+    }
+
+    .header h2 {
+        color: white;
+        text-align: center;
+    }
+
+    .return a {
+        color: white;
+        text-align: center;
+        line-height: 25px;
+        display: block;
+    }
+
+    .return {
+        width: 50px;
+        height: 25px;
+        backdrop-filter: blur(3px);
+        background-color: rgba(255, 255, 255, 0.5);
+        border-radius: 15px;
+        display: block;
+    }
+
+    .return a:hover {
+        color: #1100ff;
+    }
+
+    .delay {
+        width: 50px;
+        height: 25px;
+        backdrop-filter: blur(3px);
+        background-color: rgba(255, 255, 255, 0.5);
+        border-radius: 15px;
+        color: white;
+        font-size: 15px;
+        margin-top: 5px;
+        border: 0;
+
+    }
+
+    .content {
+        width: 100%;
+        height: 500px;
+        background-color: rgba(255, 255, 255, 0.5);
+        border-radius: 15px;
+    }
+
+    .content .time {
+        margin-top: 435px;
+        margin-left: 670px;
+    }
+
+    .comment {
+        width: 100%;
+        height: 500px;
+        background-color: rgba(255, 255, 255, 0.5);
+        border-radius: 15px;
+    }
+
+    .comment h1 {
+        text-align: center;
+    }
+
+    .comment p {
+        text-align: center;
+    }
+
+    .comment textarea {
+        background-color: rgba(255, 255, 255, 0.692);
+        border-radius: 15px;
+        border: none;
+        outline: none;
+        user-select: none;
+        font-size: 20px;
+        font-weight: 800;
+        margin-left: 400px;
+    }
+
+    .comment .submit {
+        width: 50px;
+        height: 30px;
+        backdrop-filter: blur(3px);
+        background-color: rgba(255, 255, 255, 0.5);
+        border-radius: 15px;
+    }
+
+    .commentcontent {
+        backdrop-filter: blur(3px);
+        background-color: rgba(255, 255, 255, 0.5);
+    }
+</style>
+
+<body>
+<div class="header">
+    <h1>{{.Title}}</h1>
+</div>
+
+
+<div class="return">
+    <a href="/CLASS/classroom/{{.ClassMark}}">返回</a>
+</div>
+
+
+<form action="{{.ID}}" method="post" novalidate autocomplete="off">
+
+    <input type="submit" value="删除" class="delay">
+
+</form>
+
+<hr size="2px" color="white" align="left" />
+
+<div class="content" align="center">
+
+    <h1>{{.Content}}</h1>
+    <div class="time">发布时间:{{.PostTime}}获赞{{.PointNum}}</div>
+</div>
+
+
+<hr size="2px" color="white" align="left" />
+
+
+
+<div class="comment">
+    <h1>回答</h1>
+
+    <form action="/CLASS/classroom/onehomework/{{.ID}}/answer" method="post">
+        <p>
+            回答内容:
+        </p>
+        <textarea rows="8" cols="100" name="TheAnswer"></textarea>
+
+        <input type="submit" value="发布" class="submit">
+
+    </form>
+
+    <div class="commentcontent">
+        <u1>
+            {{range .Answers}}
+
+            <h1>{{.TheAnswer}}</h1>
+
+            <div align="center">
+                <B>-----回答人:{{.Student}}</B>
+            </div>
+            <div align="center">
+                <B>回答时间:{{.AnswerTime}}</B>
+            </div>
+
+            <form action="/CLASS/classroom/onehomework/{{.HomeworkId}}/answer/{{.ID}}" method="post" novalidate autocomplete="off">
+                <div align="center">
+                    <input type="submit" value="删除" class="delay" style="color: #000000">
+                </div>
+
+
+            </form>
+            {{end}}
+        </u1>
+    </div>
+</div>
+
+
+
+
+
+
+</body>
+
+</html>

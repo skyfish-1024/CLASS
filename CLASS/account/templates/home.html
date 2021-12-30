@@ -1,0 +1,589 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>课堂派主页</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            outline: none;
+            user-select: none;
+
+        }
+
+        body {
+            display: block;
+            background-color: #f3f5f7;
+            height: 1150px;
+            width: 100%;
+            background: url(/account/images/主页.jpg) no-repeat;
+            background-size: cover;
+            background-attachment: fixed;
+
+        }
+
+        a {
+            text-decoration: none;
+        }
+
+        .header {
+            height: 100px;
+            background-color: #9c0000;
+        }
+
+        h1 {
+            text-align: center;
+            font-weight: 500;
+            color: white;
+            line-height: 100px;
+        }
+
+        .user {
+            float: right;
+            line-height: 42px;
+            font-size: 20px;
+            color: black;
+            font-weight: 900;
+            position: absolute;
+            top: 25px;
+            right: 10px;
+        }
+.out{
+    background-color: transparent;
+    border:none;
+    position: absolute;
+    right: 5px;
+    top: 40px;
+}
+
+        .section {
+            height: 50px;
+            background-color: #1c036c;
+            line-height: 50px;
+        }
+
+        li {
+            list-style: none;
+        }
+
+        .section ul li {
+            width: 300px;
+            float: left;
+            margin: 0 40px;
+            display: block;
+            font-size: 22px;
+            text-align: center;
+            color: #fff;
+
+        }
+
+        .current {
+            background-color: #110047;
+            color: #fff;
+
+        }
+
+        .section ul .first {
+            margin: 0 !important;
+        }
+
+        .address {
+            width: 300px;
+            height: 1000px;
+            background-color: rgba(255, 255, 255, 0.678);
+            float: left;
+            border-radius: 15px;
+        }
+
+        .address #Name {
+            width: 230px;
+            outline: none;
+            user-select: none;
+            background-color: transparent;
+            font-size: 22px;
+            border: none;
+            backdrop-filter: blur(3px);
+            border-top: 2px solid rgba(255, 255, 255, .3);
+            border-left: 2px solid rgba(255, 255, 255, .3);
+            box-shadow: 2px 2px 10px rgba(0, 0, 0, .2);
+            border-radius: 30px;
+            margin-top: 10px;
+            margin-left: 5px;
+
+        }
+
+        .address #submit {
+            width: 50px;
+            outline: none;
+            user-select: none;
+            background-color: transparent;
+            font-size: 18px;
+            border: none;
+            backdrop-filter: blur(3px);
+            border-top: 2px solid rgba(255, 255, 255, .3);
+            border-left: 2px solid rgba(255, 255, 255, .3);
+            box-shadow: 2px 2px 10px rgba(0, 0, 0, .2);
+            border-radius: 30px;
+            margin-top: 10px;
+            margin-left: 5px;
+
+        }
+
+        .address div a {
+            color: black;
+            margin-top: 100px;
+            text-align: center;
+            line-height: 30px;
+
+
+
+        }
+
+        .address div {
+            width: 280px;
+            height: 30px;
+            background-color: transparent;
+            backdrop-filter: blur(3px);
+            border-top: 2px solid rgba(255, 255, 255, .3);
+            border-left: 2px solid rgba(255, 255, 255, .3);
+            box-shadow: 2px 2px 10px rgba(0, 0, 0, .2);
+            border-radius: 30px;
+            margin-left: 10px;
+            margin-top: 10px;
+        }
+
+        .item {
+            width: 1340px;
+            height: 1000px;
+            background-color: rgba(255, 255, 255, 0.5);
+            float: right;
+            border-radius: 15px;
+            display: none;
+        }
+
+        .item .book input {
+            background-color: rgba(230, 230, 230, 0.2);
+
+        }
+
+        #ClassMark {
+            margin-top: 15px;
+            background-color: rgba(230, 230, 230, 0.2);
+            width: 150px;
+            height: 30px;
+            margin-left: 590px;
+            border-radius: 15px;
+            border: none;
+        }
+
+        .submit2 {
+            width: 80px;
+            height: 30px;
+            backdrop-filter: blur(3px);
+            background-color: rgba(230, 230, 230, 0.2);
+            border-top: 2px solid rgba(255, 255, 255, .3);
+            border-left: 2px solid rgba(255, 255, 255, .3);
+            box-shadow: 2px 2px 10px rgba(0, 0, 0, .2);
+            border-radius: 30px;
+        }
+
+        .setClass {
+            display: block;
+            width: 300px;
+            height: 40px;
+            background-color: rgba(230, 230, 230, 0.2);
+            backdrop-filter: blur(3px);
+            border-top: 2px solid rgba(255, 255, 255, .3);
+            border-left: 2px solid rgba(255, 255, 255, .3);
+            box-shadow: 2px 2px 10px rgba(0, 0, 0, .2);
+            border-radius: 30px;
+            position: absolute;
+            top: 250px;
+            left: 500px;
+        }
+
+        .setClass a {
+            color: black;
+            display: block;
+            text-align: center;
+            width: 100%;
+            height: auto;
+            line-height: 40px;
+            font-size: large;
+            line-height: 40px;
+        }
+
+        .setClass a:hover {
+            color: #1100ff;
+        }
+
+        .history {
+            width: 300px;
+            height: 40px;
+            background-color: #fff;
+            display: block;
+            background-color: rgba(230, 230, 230, 0.2);
+            backdrop-filter: blur(3px);
+            border-top: 2px solid rgba(255, 255, 255, .3);
+            border-left: 2px solid rgba(255, 255, 255, .3);
+            box-shadow: 2px 2px 10px rgba(0, 0, 0, .2);
+            border-radius: 30px;
+            position: absolute;
+            top: 250px;
+            right: 300px;
+            line-height: 40px;
+            font-size: large;
+        }
+
+        .history a {
+            color: black;
+            display: block;
+            text-align: center;
+            width: 100%;
+            height: auto;
+            line-height: 40px;
+        }
+
+        .history a:hover {
+            color: #1100ff;
+        }
+
+        .preclass {
+            position: absolute;
+            top: 90px;
+            left: 10px;
+            width: 400px;
+            height: 500px;
+            background-color: rgba(73, 73, 73, 0.2);
+            backdrop-filter: blur(3px);
+            border-top: 2px solid rgba(255, 255, 255, .3);
+            border-left: 2px solid rgba(255, 255, 255, .3);
+            box-shadow: 2px 2px 10px rgba(0, 0, 0, .2);
+            display: none;
+            border-radius: 15px;
+        }
+
+        .book h1 {
+            text-align: center;
+        }
+
+        .book {
+            margin-top: 200px;
+            margin-left: 200px;
+            width: 1000px;
+            height: 500px;
+            background-color: rgba(255, 255, 255, 0.671);
+            border-radius: 30px;
+        }
+
+        .item table {
+            margin-top: 10px;
+            margin-left: 280px;
+            height: 200px;
+            width: 500px;
+            text-align: center;
+        }
+
+        .item .add {
+            width: 50px;
+            height: 25px;
+            margin-top: 15px;
+            margin-left: 10px;
+            backdrop-filter: blur(3px);
+            border-top: 2px solid rgba(255, 255, 255, .3);
+            border-left: 2px solid rgba(255, 255, 255, .3);
+            box-shadow: 2px 2px 10px rgba(0, 0, 0, .2);
+            border-radius: 30px;
+
+        }
+
+        .item a {
+            display: block;
+            color: black;
+            margin-left: 10px;
+            line-height: 25px;
+        }
+
+        .item a:hover {
+            color: #1100ff;
+        }
+
+        .item table input {
+            background-color: rgba(230, 230, 230, 0.2);
+            width: 50px;
+            border-radius: 30px;
+        }
+
+        .item input:hover {
+            color: #1100ff;
+        }
+
+        .talk {
+            width: 300px;
+            height: 40px;
+            background-color: #fff;
+            display: block;
+            background-color: rgba(230, 230, 230, 0.2);
+            backdrop-filter: blur(3px);
+            border-top: 2px solid rgba(255, 255, 255, .3);
+            border-left: 2px solid rgba(255, 255, 255, .3);
+            box-shadow: 2px 2px 10px rgba(0, 0, 0, .2);
+            border-radius: 30px;
+            margin-top: 25px;
+            margin-left: 500px;
+            line-height: 40px;
+            font-size: large;
+        }
+
+        .talk a {
+            color: black;
+            display: block;
+            text-align: center;
+            width: 100%;
+            height: auto;
+            line-height: 40px;
+
+        }
+
+        .talk a:hover {
+            color: #1100ff;
+        }
+
+        .zan {
+            width: 80px;
+            height: 30px;
+            backdrop-filter: blur(3px);
+            background-color: rgba(230, 230, 230, 0.2);
+            border-top: 2px solid rgba(255, 255, 255, .3);
+            border-left: 2px solid rgba(255, 255, 255, .3);
+            box-shadow: 2px 2px 10px rgba(0, 0, 0, .2);
+            border-radius: 30px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="header">
+        <h1>课堂派</h1>
+        <!-- 用户模块 -->
+        <div class="user">
+            <img src="" alt="">
+            亲爱的：{{.username}}
+            <a href="unsubscribe">注销账号</a>
+            <form action="out" method="post" novalidate autocomplete="off">
+                <div>
+                    <input type="submit" value="退出登录"  class="out">
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <div class="section">
+        <ul>
+            <li class="first">所有用户</li>
+            <li>课堂</li>
+            <li>成绩管理</li>
+            <li>话题</li>
+        </ul>
+    </div>
+
+    <div class="address">
+        <input type="text" name="Name" id="Name" placeholder="  搜索">
+        <input type="submit" name="" id="submit" value="搜索">
+        <div>
+            <a href="addaddress" style="text-align: center;"> 添加联系人</a>
+        </div>
+
+        <u1>
+            {{range .Students}}
+            <div>
+                {{.StuName}}
+            </div>
+            {{end}}
+        </u1>
+    </div>
+
+
+    <!-- 课堂 -->
+    <div class="item">
+        <div class="setClass">
+            <a href="classroom/create">创建课堂</a>
+        </div>
+        <form action="/CLASS/classroom/enter" method="post" novalidate autocomplete="off">
+
+            <input type="text" name="ClassMark" id="ClassMark" placeholder=" 课堂暗号">
+            <input type="submit" value="加入课堂" class="submit2">
+        </form>
+
+
+        <div class="history">
+            <u1>
+                <a href="#" class="lishi">历史课堂</a>
+
+                <div class="preclass">
+                    {{range .classRooms}}
+                    <div style="border-bottom-style: double">
+                        <a href="/CLASS/classroom/{{.ClassMark}}">{{.Describe}}</a>
+                    </div>
+
+                    {{end}}
+                </div>
+
+            </u1>
+        </div>
+
+        <div class="book">
+            <h1>课件</h1>
+
+            <div align="center">
+                <form action="files/upload" method="post" enctype="multipart/form-data">
+                    上传文件:<input type="file" name="files" multiple>
+                    <input type="submit" value="上传">
+                </form>
+
+            </div>
+
+            <u1>
+                {{range .files}}
+                <div style="border-bottom-style: double">
+                    <form action="{{.}}" method="post" novalidate autocomplete="off">
+                        {{.}}
+                        <input type="submit" value="下载">
+                    </form>
+                </div>
+                {{end}}
+            </u1>
+            <!-- 上传课件你看看怎么具体实现 -->
+        </div>
+    </div>
+    <!-- 成绩管理 -->
+    <div class="item">
+        <a href="Addscore">添加</a>
+        <table border="1" cellspacing="0">
+            <tr>
+                <td>考试分类</td>
+                <td>考试编号</td>
+                <td>班级</td>
+                <td>姓名</td>
+                <td>语文</td>
+                <td>英语</td>
+                <td>数学</td>
+                <td>总分</td>
+                <td>操作</td>
+            </tr>
+
+            <u1>
+                {{range .Scores}}
+                <tr>
+                    <td>{{.ExaminationName}}</td>
+                    <td>{{.ExaminationNumber}}</td>
+                    <td>{{.Class}}</td>
+                    <td>{{.StuName}}</td>
+                    <td>{{.ChineseScore}}</td>
+                    <td>{{.MathScore}}</td>
+                    <td>{{.EnglishScore}}</td>
+                    <td>{{.TotalScore}}</td>
+                    <td>
+                        <form action="Deletescore/{{.ID}}" method="post" novalidate autocomplete="off">
+                            <div>
+                                <input type="submit" value="删除" class="delay">
+                            </div>
+
+
+                        </form>
+                    </td>
+                </tr>
+                {{end}}
+            </u1>
+
+
+        </table>
+        <!-- 上传文件 -->
+    </div>
+
+    <!-- 话题 -->
+    <div class="item">
+        <div class="talk">
+            <a href="publishtopic">发布话题</a>
+        </div>
+
+        <u1>
+            {{range .Topics}}
+            <div style="border-bottom-style: double">
+                <h1>{{.Title}}</h1>
+                <p>
+                    {{.Content}}
+                </p>
+
+                <p>
+                    <c>{{.PostTime}}</c>
+                </p>
+                <div align="center">
+                    <form action="/CLASS/onetopic/{{.ID}}/point" method="post" novalidate autocomplete="off">
+                        <div>
+                            作者:{{.Poster}}
+                            <input type="submit" value="点赞{{.PointNum}}" class="zan">
+                        </div>
+                    </form>
+                </div>
+
+                <div><a href="onetopic/{{.ID}}">详情</a></div>
+            </div>
+            {{end}}
+        </u1>
+
+        <!-- 又是博客 -->
+    </div>
+
+
+    <script>
+        //1、排他思想
+        //获取元素
+        var section = document.querySelector('.section');
+        var lis = section.querySelectorAll('li');
+        var items = document.querySelectorAll('.item');
+        var back = document.querySelector('.back');
+        //for循环绑定点击事件
+        for (let i = 1; i < lis.length; i++) {
+            lis[i].setAttribute('index', i);
+            lis[i].onclick = function () {
+                //干掉所有人，其余清除
+                for (let i = 1; i < lis.length; i++) {
+                    lis[i].className = '';
+                }
+                this.className = 'current';
+                //显示内容
+                let index = this.getAttribute('index');
+                console.log(index);
+                //干掉所有人
+
+                for (let i = 0; i < items.length; i++) {
+                    items[i].style.display = 'none';
+                }
+
+                items[index - 1].style.display = 'block';
+            }
+        }
+
+        var preclass = document.querySelector('.preclass');
+        var lishi = document.querySelector('.lishi');
+        var flag = 1;
+        lishi.onclick = function () {
+            if (flag == 1) {
+                preclass.style.display = 'block';
+                flag = 0;
+            }
+            else if (flag == 0) {
+                preclass.style.display = 'none';
+                flag = 1;
+            }
+
+        }
+    </script>
+</body>
+
+</html>

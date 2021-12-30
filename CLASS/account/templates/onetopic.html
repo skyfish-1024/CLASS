@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <title>Myblog</title>
+</head>
+<style>
+  a {
+    text-decoration: none;
+  }
+
+  body {
+    display: block;
+    background-color: #f3f5f7;
+    height: 2000px;
+    width: 100%;
+    background: url(/account/images/登录背景.jpg) no-repeat;
+    background-size: cover;
+    background-attachment: fixed;
+
+  }
+
+  .header h1 {
+    color: white;
+    text-align: center;
+  }
+
+  .header h2 {
+    color: white;
+    text-align: center;
+  }
+
+  .return a {
+    color: white;
+    text-align: center;
+    line-height: 25px;
+padding-left: 8px;
+  }
+
+  .return {
+    width: 50px;
+    height: 25px;
+    backdrop-filter: blur(3px);
+    background-color: rgba(255, 255, 255, 0.5);
+    border-radius: 15px;
+
+
+  }
+
+  .return a:hover {
+    color: #1100ff;
+  }
+
+  .delay1 {
+    width: 50px;
+    height: 25px;
+    backdrop-filter: blur(3px);
+    background-color: rgba(255, 255, 255, 0.5);
+    border-radius: 15px;
+    color: white;
+    font-size: 15px;
+    margin-top: 5px;
+    border: 0;
+    position: absolute;
+    top:130px;
+    right: 5px;
+
+  }
+  .delay1:hover{
+    color: #1100ff;
+  }
+  .content {
+    width: 100%;
+    height: 500px;
+    background-color: rgba(255, 255, 255, 0.5);
+    border-radius: 15px;
+  }
+
+  .content .time {
+    margin-top: 435px;
+    margin-left: 670px;
+  }
+
+  .comment {
+    width: 100%;
+    height: 900px;
+    background-color: rgba(255, 255, 255, 0.5);
+    border-radius: 15px;
+  }
+
+  .comment h1 {
+    text-align: center;
+  }
+
+  .comment p {
+    text-align: center;
+  }
+
+  .comment textarea {
+    background-color: rgba(255, 255, 255, 0.692);
+    border-radius: 15px;
+    border: none;
+    outline: none;
+    user-select: none;
+    font-size: 20px;
+    font-weight: 800;
+    margin-left: 400px;
+  }
+
+  .comment .submit {
+    width: 50px;
+    height: 30px;
+    backdrop-filter: blur(3px);
+    background-color: rgba(255, 255, 255, 0.5);
+    border-radius: 15px;
+  }
+
+  .commentcontent {
+    height: 300px;
+    backdrop-filter: blur(3px);
+    background-color: rgba(255, 255, 255, 0.5);
+    border-radius: 30px;
+
+
+  }
+  .commentcontent .zan{
+    display: block;
+    margin-left: 830px;
+    float: left;
+    margin-top: 5px;
+    width: 50px;
+    height: 25px;
+    backdrop-filter: blur(3px);
+    background-color: rgba(255, 255, 255, 0.5);
+    border-radius: 15px;
+    color: white;
+    font-size: 15px;
+
+    border: 0;
+
+  }
+  .commentcontent .delay{
+    display: block;
+    margin-left: 80px;
+    float: left;
+    width: 50px;
+    height: 25px;
+    backdrop-filter: blur(3px);
+    background-color: rgba(255, 255, 255, 0.5);
+    border-radius: 15px;
+    color: white;
+    font-size: 15px;
+   margin-top: 5px;
+    border: 0;
+  }
+</style>
+
+<body>
+  <div class="header">
+    <h2>友善是交流的起点</h2>
+    <h1>{{.Title}}</h1>
+  </div>
+
+
+  <div class="return">
+    <a href="/CLASS/home">  返回</a>
+  </div>
+
+
+  <form action="{{.ID}}" method="post" novalidate autocomplete="off">
+
+    <input type="submit" value="删除" class="delay1">
+
+  </form>
+
+  <hr size="2px" color="white" align="left" />
+
+  <div class="content" align="center">
+
+    <h1>{{.Content}}</h1>
+    <div class="time">发布时间:{{.PostTime}}获赞{{.PointNum}}</div>
+  </div>
+
+
+  <hr size="2px" color="white" align="left" />
+
+
+
+  <div class="comment">
+    <h1>评论</h1>
+
+    <form action="/CLASS/onetopic/{{.ID}}/comment" method="post">
+      <p>
+        留言内容:
+      </p>
+      <textarea rows="8" cols="100" name="Comment"></textarea>
+
+      <input type="submit" value="发布" class="submit">
+
+    </form>
+
+    <div class="commentcontent">
+      <u1>
+        {{range .Comments}}
+        <h1>{{.Comment}}</h1>
+
+        <div align="center">
+          <B>-----评论者:{{.Observer}}</B>
+        </div>
+        <div align="center">
+          <B>评论时间:{{.CommentTime}}</B>
+          <form action="/CLASS/onetopic/{{.TopicId}}/comment/{{.ID}}/point" method="post" novalidate autocomplete="off">
+            <div>
+              <input type="submit" value="点赞{{.PointNum}}" class="zan" style="color: black">
+            </div>
+          </form>
+        </div>
+
+        <form action="/CLASS/onetopic/{{.TopicId}}/comment/{{.ID}}" method="post" novalidate autocomplete="off">
+<div align="center">
+  <input type="submit" value="删除" class="delay" style="color: black" >
+ <br style="width: 1000px" style="color: white">
+</div>
+
+
+        </form>
+        {{end}}
+      </u1>
+    </div>
+  </div>
+
+
+
+
+
+
+</body>
+
+</html>

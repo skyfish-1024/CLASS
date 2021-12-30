@@ -1,0 +1,305 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<style>
+    * {
+        margin: 0;
+        padding: 0;
+
+    }
+
+    a {
+        text-decoration: none;
+    }
+
+    body {
+        display: block;
+        height: 1150px;
+        width: 100%;
+        background: url(/account/images/主页.jpg) no-repeat;
+        background-size: cover;
+        background-attachment: fixed;
+
+    }
+   .out{
+     position: absolute;
+       top: 100px;
+       right: 5px;
+       font-size: 20px;
+   }
+
+    .header {
+        height: 150px;
+        background-color: #9c0000;
+
+    }
+
+    .header .user {
+        padding-top: 25px;
+        padding-left: 15px;
+        font-size: 50px;
+        font-weight: bolder;
+    }
+h6{margin-left: 15px}
+
+.code{
+    display: block;
+    position: absolute;
+    top: 30px;
+    right: 5px;
+    font-size: 50px;
+}
+    .video {
+        margin-left: 5px;
+        width: 1100px;
+        height: 620px;
+
+        margin-top: 40px;
+
+        border-radius: 15px;
+        display: block;
+        float: left;
+    }
+
+    .conversation {
+        float: left;
+        width: 1100px;
+        height: 600px;
+        background-color: rgba(255, 255, 255, 0.5);
+        margin-top: 15px;
+        margin-left: 5px;
+        border-radius: 15px;
+        display: block;
+    }
+
+    .conversation textarea {
+        background-color: rgba(255, 255, 255, 0.692);
+        border-radius: 15px;
+        border: none;
+        outline: none;
+        user-select: none;
+        font-size: 20px;
+        font-weight: 800;
+
+    }
+
+    .qiandao {
+        margin-top: 15px;
+        width: 80px;
+        height: 30px;
+        backdrop-filter: blur(3px);
+        background-color: rgba(230, 230, 230, 0.2);
+        border-top: 2px solid rgba(255, 255, 255, .3);
+        border-left: 2px solid rgba(255, 255, 255, .3);
+        box-shadow: 2px 2px 10px rgba(0, 0, 0, .2);
+        border-radius: 30px;
+    }
+
+    .homework {
+
+        width: 700px;
+        height: 1235px;
+        background-color: rgba(255, 255, 255, 0.5);
+        border-radius: 15px;
+        display: block;
+        margin-top: 1px;
+        margin-right: 1px;
+        position: absolute;
+        right: 10px;
+        top: 173px;
+    }
+</style>
+<div class="header">
+    <!-- 搜索模块 -->
+
+    <!-- 用户模块 -->
+    <div class="user">
+        <img src="" alt="">
+        {{.Teacher}}的课堂： <h6 style="display: block" >简述：{{.Describe}}</h6>
+        <a href="/CLASS/home" class="out">退出</a>
+
+        <div class="code">
+            课堂暗号:{{.ClassMark}} </div>
+    </div>
+
+    <div class="video">
+
+        <video src="/account/images/test.mp4" width="1100" controls></video>
+
+    </div>
+
+    <div class="conversation">
+
+        <div style="width: 800px;height: 600px;margin: 30px auto;text-align: center">
+            <h1>聊天室</h1>
+            <div style="width: 800px;border: 1px solid gray;height: 300px;">
+                <div style="width: 200px;height: 300px;float: left;text-align: left;">
+                    <p><span>当前在线:</span><span id="user_num">0</span></p>
+                    <div id="user_list" style="overflow: auto;">
+                    </div>
+                </div>
+                <div id="msg_list"
+                    style="width: 598px;border:  1px solid gray; height: 300px;overflow: scroll;float: left;">
+                </div>
+            </div>
+            <br>
+            <textarea id="msg_box" rows="6" cols="50" onkeydown="confirm(event)"></textarea><br>
+            <input type="button" value="发送" onclick="send()">
+        </div>
+
+
+    </div>
+
+    <div class="homework">
+        <div align="center">
+            <form action="/CLASS/classroom/{{.ClassMark}}/signIn" method="post" novalidate autocomplete="off">
+                <div>
+                    <input type="submit" value="签到{{.SignNum}}" class="qiandao" style="color: black">
+                </div>
+            </form>
+            <div class="talk">
+                <a href="/CLASS/classroom/{{.ClassMark}}/publishhomework">发布作业</a>
+            </div>
+
+            <u1>
+                {{range .homeworks}}
+                <div style="border-bottom-style: double">
+                    <h1>{{.Title}}</h1>
+                    <p>
+                        {{.Content}}
+                    </p>
+
+                    <p>
+                        <c>{{.PostTime}}</c>
+                    </p>
+                    <div align="center">
+                        <p>发布者:{{.Poster}}</p>
+                    </div>
+
+                    <div><a href="{{.ClassMark}}/onehomework/{{.ID}}">详情</a></div>
+                </div>
+                {{end}}
+            </u1>
+
+            <!-- 又是博客 -->
+        </div>
+
+    </div>
+</div>
+</div>
+
+<body>
+
+</body>
+
+</html>
+
+
+<!--聊天室-->
+<script type="text/javascript">
+    var uname = "{{.user}}";
+    var ws = new WebSocket("ws://127.0.0.1:8080/ws");
+    ws.onopen = function () {
+        var data = "系统消息：进入课堂成功";
+        listMsg(data);
+    };
+    ws.onmessage = function (e) {
+        var msg = JSON.parse(e.data);
+        var sender, user_name, name_list, change_type;
+        switch (msg.type) {
+            case 'system':
+                sender = '系统消息: ';
+                break;
+            case 'user':
+                sender = msg.from + ': ';
+                break;
+            case 'handshake':
+                var user_info = { 'type': 'login', 'content': uname };
+                sendMsg(user_info);
+                return;
+            case 'login':
+            case 'logout':
+                user_name = msg.content;
+                name_list = msg.user_list;
+                change_type = msg.type;
+                dealUser(user_name, change_type, name_list);
+                return;
+        }
+        var data = sender + msg.content;
+        listMsg(data);
+    };
+    ws.onerror = function () {
+        var data = "系统消息 : 出错了,请退出重试.";
+        listMsg(data);
+    };
+    function confirm(event) {
+        var key_num = event.keyCode;
+        if (13 == key_num) {
+            send();
+        } else {
+            return false;
+        }
+    }
+    function send() {
+        var msg_box = document.getElementById("msg_box");
+        var content = msg_box.value;
+        var reg = new RegExp("\r\n", "g");
+        content = content.replace(reg, "");
+        var msg = { 'content': content.trim(), 'type': 'user' };
+        sendMsg(msg);
+        msg_box.value = '';
+    }
+    function listMsg(data) {
+        var msg_list = document.getElementById("msg_list");
+        var msg = document.createElement("p");
+        msg.innerHTML = data;
+        msg_list.appendChild(msg);
+        msg_list.scrollTop = msg_list.scrollHeight;
+    }
+    function dealUser(user_name, type, name_list) {
+        var user_list = document.getElementById("user_list");
+        var user_num = document.getElementById("user_num");
+        while (user_list.hasChildNodes()) {
+            user_list.removeChild(user_list.firstChild);
+        }
+        for (var index in name_list) {
+            var user = document.createElement("p");
+            user.innerHTML = name_list[index];
+            user_list.appendChild(user);
+        }
+        user_num.innerHTML = name_list.length;
+        user_list.scrollTop = user_list.scrollHeight;
+        var change = type == 'login' ? '进入课堂' : '退出课堂';
+        var data = '系统消息: ' + user_name + ' 已' + change;
+        listMsg(data);
+    }
+    function sendMsg(msg) {
+        var data = JSON.stringify(msg);
+        ws.send(data);
+    }
+    function uuid(len, radix) {
+        var chars = '0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz'.split('');
+        var uuid = [], i;
+        radix = radix || chars.length;
+        if (len) {
+            for (i = 0; i < len; i++) uuid[i] = chars[0 | Math.random() * radix];
+        } else {
+            var r;
+            uuid[8] = uuid[13] = uuid[18] = uuid[23] = '-';
+            uuid[14] = '4';
+            for (i = 0; i < 36; i++) {
+                if (!uuid[i]) {
+                    r = 0 | Math.random() * 16;
+                    uuid[i] = chars[(i == 19) ? (r & 0x3) | 0x8 : r];
+                }
+            }
+        }
+        return uuid.join('');
+    }
+</script>
