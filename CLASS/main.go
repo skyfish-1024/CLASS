@@ -97,12 +97,7 @@ func main() {
 		r.POST("/CLASS/classroom/onehomework/:ID/answer", classroom.POSTAnswer)             //POST请求回答
 		r.POST("/CLASS/classroom/onehomework/:ID/answer/:answerID", classroom.DeleteAnswer) //删除回答
 
-		//聊天室功能测试
-		r.GET("/CLASS/chat", func(c *gin.Context) {
-			c.HTML(200, "local.html", nil)
+		r.Run(":9090")
 
-		})
 	}
-	r.Run(":9090")
-
 }

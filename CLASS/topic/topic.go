@@ -115,6 +115,7 @@ func ONETopic(c *gin.Context) {
 		c.HTML(200, "onetopic.html", gin.H{
 			"Title":    Topic.Title,
 			"Content":  Topic.Content,
+			"Poster":   Topic.Poster,
 			"PostTime": Topic.PostTime,
 			"PointNum": Topic.PointNum,
 			"username": login.User.StuName,

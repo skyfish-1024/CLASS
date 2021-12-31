@@ -3,7 +3,7 @@
 
 <head>
     <meta charset="UTF-8">
-    <title>Myblog</title>
+    <title>作业详情</title>
 </head>
 <style>
     a {
@@ -51,7 +51,7 @@
         color: #1100ff;
     }
 
-    .delay {
+    .delay1 {
         width: 50px;
         height: 25px;
         backdrop-filter: blur(3px);
@@ -61,7 +61,13 @@
         font-size: 15px;
         margin-top: 5px;
         border: 0;
+        position: absolute;
+        top:82px;
+        right: 5px;
 
+    }
+    .delay1:hover{
+        color: #1100ff;
     }
 
     .content {
@@ -129,7 +135,7 @@
 
 <form action="{{.ID}}" method="post" novalidate autocomplete="off">
 
-    <input type="submit" value="删除" class="delay">
+    <input type="submit" value="删除" class="delay1">
 
 </form>
 
@@ -153,7 +159,7 @@
         <p>
             回答内容:
         </p>
-        <textarea rows="8" cols="100" name="TheAnswer"></textarea>
+        <textarea rows="8" cols="80" name="TheAnswer"></textarea>
 
         <input type="submit" value="发布" class="submit">
 
