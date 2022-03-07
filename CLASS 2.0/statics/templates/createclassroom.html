@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>发布ketang </title>
+</head>
+<style>
+    * {
+        margin: 0;
+        padding: 0;
+        outline: none;
+        user-select: none;
+
+    }
+
+    body {
+        display: block;
+        background-color: #f3f5f7;
+        height: 1150px;
+        width: 100%;
+        background: url(/statics/images/home.jpg) no-repeat;
+        background-size: cover;
+        background-attachment: fixed;
+
+    }
+
+    h1 {
+        text-align: center;
+        color: white;
+        font-size: 100px;
+        margin-top: 20px;
+
+    }
+
+    .set {
+        position: absolute;
+        top: 200px;
+        left: 580px;
+        width: 500px;
+        height: 500px;
+        backdrop-filter: blur(3px);
+        border-top: 2px solid rgba(255, 255, 255, .3);
+        border-left: 2px solid rgba(255, 255, 255, .3);
+        box-shadow: 2px 2px 10px rgba(0, 0, 0, .2);
+        background-color: rgba(255, 255, 255, .3);
+        border-radius: 30px;
+    }
+
+    input {
+        width: 350px;
+        margin-top: 35px;
+        outline: none;
+        user-select: none;
+        background-color: transparent;
+        font-size: 22px;
+        border: none;
+        backdrop-filter: blur(3px);
+        border-top: 2px solid rgba(255, 255, 255, .3);
+        border-left: 2px solid rgba(255, 255, 255, .3);
+        box-shadow: 2px 2px 10px rgba(0, 0, 0, .2);
+        border-radius: 15px;
+        color: black;
+        font-weight: 800;
+        margin-left: 70px;
+    }
+
+    a {
+        color: black;
+        text-decoration: none;
+        position: absolute;
+        top: 280px;
+        left: 230px;
+    }
+
+    a:hover {
+        color: skyblue;
+    }
+
+    input::-webkit-input-placeholder {
+        color: black;
+    }
+
+    input::-moz-placeholder {
+        /* Mozilla Firefox 19+ */
+        color: black;
+    }
+
+    input:-moz-placeholder {
+        /* Mozilla Firefox 4 to 18 */
+        color: black;
+    }
+
+    input:-ms-input-placeholder {
+        color: black;
+    }
+
+    .set .submit {
+        text-align: center;
+        width: 200px;
+        height: 35px;
+        margin-top: 35px;
+        margin-left: 140px;
+        border-radius: 20px;
+
+        line-height: 35px;
+    }
+
+    .set .submit:hover {
+        background-color: rgb(223, 223, 223);
+    }
+</style>
+
+<body>
+    <h1>创建课堂</h1>
+    <div class="set">
+        <form action="/CLASS/classroom/:ClassMark" method="post">
+
+            <label><input type="text" name="Teacher" placeholder="  老师"></label>
+
+            <label><input type="test" name="Describe" placeholder="  描述"></label>
+
+            <input type="submit" value="发布" class="submit">
+            <a href="/CLASS/home">返回</a>
+
+        </form>
+
+    </div>
+
+</body>
+
+</html>
